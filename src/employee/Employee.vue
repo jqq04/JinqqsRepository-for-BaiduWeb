@@ -1,14 +1,14 @@
-<template>
+<template xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
   <div>
-    <button v-on:click="changeTitleColor">修改标题颜色</button>
     <Title title="员工管理"></Title>
+    <button v-on:click="changeTitleColor">修改标题颜色</button>
     <div>
       <h2 v-bind:class="titleColor">职位管理</h2>
-      <input type="text" class="inputItem" size="10px" v-model = "postInfo">
+      <input type="text" class="inputItem" size="10px" required="required" v-model = "postInfo">
       <button v-on:click="addPost">新增职位</button>
     </div>
     <br>
-    <table class="gridtable" width="200">
+    <table class="gridTable" width="200">
       <thead>
         <tr>
           <th class="column">职位列表</th>
@@ -27,28 +27,28 @@
     <div>
       <h2 v-bind:class="titleColor">员工管理</h2>
       <label>姓名</label>
-      <input type="text" class="inputItem" size="10px" v-model = "employeeInfo.name">
+      <input type="text" class="inputItem" size="10px" required="required" v-model = "employeeInfo.name">
       <label>性别</label>
-      <select type="text" class="inputItem" v-model = "employeeInfo.gender">
+      <select type="text" class="inputItem" required="required" v-model = "employeeInfo.gender">
         <option>男</option>
         <option>女</option>
       </select>
       <label>出生日期</label>
-      <input type="date" class="inputItem" v-model = "employeeInfo.birthday">
+      <input type="date" class="inputItem" required="required" v-model = "employeeInfo.birthday">
       <label>职位</label>
-      <select type="text" class="inputItem" v-model = "employeeInfo.post">
+      <select type="text" class="inputItem" required="required" v-model = "employeeInfo.post">
         <option v-for= "item in postList" :key="item">
           {{item}}
         </option>
       </select>
       <label>薪资</label>
-      <input type="number" class="inputItem"  placeholder="0" v-model = "employeeInfo.salary">
+      <input type="number" class="inputItem"  placeholder="0" required="required" v-model = "employeeInfo.salary">
 
       <button v-on:click="addEmployee">新增员工</button>
     </div>
     <br>
 
-    <table class="gridtable" width="1000px">
+    <table class="gridTable" width="1000px">
       <thead>
         <tr>
           <th width="30px">编号</th>
@@ -104,6 +104,7 @@ export default {
     },
     addPost () {
       this.postList.push(this.postInfo)
+      this.postInfo = this.$options.data().postInfo
     },
     addEmployee () {
       let employeeInfo = this.employeeInfo
@@ -114,6 +115,7 @@ export default {
     }
   }
 }
+
 </script>
 <style>
   .black{
@@ -123,7 +125,7 @@ export default {
     color: red;
   }
 
-  table.gridtable {
+  table.gridTable {
     position: relative;
     margin: 0px auto;
     font-family: verdana,arial,sans-serif;
@@ -133,14 +135,14 @@ export default {
     border-color: #666666;
     border-collapse: collapse;
   }
-  table.gridtable th {
+  table.gridTable th {
     border-width: 1px;
     padding: 8px;
     border-style: solid;
     border-color: #666666;
     background-color: #dedede;
   }
-  table.gridtable td {
+  table.gridTable td {
     border-width: 1px;
     adding: 8px;
     border-style: solid;
